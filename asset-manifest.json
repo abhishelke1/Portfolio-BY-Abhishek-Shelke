@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Portfolio-BY-Abhishek-Shelke/static/css/main.a91272bf.css",
-    "main.js": "/Portfolio-BY-Abhishek-Shelke/static/js/main.bbbb7247.js",
+    "main.js": "/Portfolio-BY-Abhishek-Shelke/static/js/main.67a22dfd.js",
     "static/js/453.1407b060.chunk.js": "/Portfolio-BY-Abhishek-Shelke/static/js/453.1407b060.chunk.js",
     "static/media/devicon.svg?iehcku": "/Portfolio-BY-Abhishek-Shelke/static/media/devicon.de33ff67547800466a48.svg",
     "static/media/devicon.woff?iehcku": "/Portfolio-BY-Abhishek-Shelke/static/media/devicon.25bdb9cbf8e5f9b4dde9.woff",
@@ -18,16 +18,16 @@
     "static/media/cert9.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/cert9.003a9326333683dd7f32.jpg",
     "static/media/cert3.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/cert3.575d1a0e03ee8560443e.jpg",
     "static/media/agroeasy1.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/agroeasy1.a8e5f40240431f33fb59.jpg",
-    "static/media/120_Abhishek shelke.pdf": "/Portfolio-BY-Abhishek-Shelke/static/media/120_Abhishek shelke.46738b9a9a8b8ebc8add.pdf",
+    "static/media/120_Abhishek shelke.pdf": "/Portfolio-BY-Abhishek-Shelke/static/media/120_Abhishek shelke.0d1292cc51dc5576ce1d.pdf",
     "static/media/profile.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/profile.057687b446572db70e63.jpg",
     "static/media/cert5.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/cert5.faf94420bc746ed3d0d2.jpg",
     "index.html": "/Portfolio-BY-Abhishek-Shelke/index.html",
     "main.a91272bf.css.map": "/Portfolio-BY-Abhishek-Shelke/static/css/main.a91272bf.css.map",
-    "main.bbbb7247.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/main.bbbb7247.js.map",
+    "main.67a22dfd.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/main.67a22dfd.js.map",
     "453.1407b060.chunk.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a91272bf.css",
-    "static/js/main.bbbb7247.js"
+    "static/js/main.67a22dfd.js"
   ]
 }

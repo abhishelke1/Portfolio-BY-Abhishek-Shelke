@@ -105,7 +105,8 @@ const CanvasBackground = ({ darkMode }) => {
         const initParticles = () => {
             particles = [];
             // Reduced particle count for better performance (Low Latency)
-            const particleCount = darkMode ? 80 : 40;
+            const isMobile = window.innerWidth < 768;
+            const particleCount = isMobile ? 20 : (darkMode ? 80 : 40);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }

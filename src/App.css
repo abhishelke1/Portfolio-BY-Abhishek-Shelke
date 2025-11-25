@@ -1971,21 +1971,6 @@ body {
     left: 0%;
   }
 
-  .timeline-item.left::after,
-  .timeline-item.right::after {
-    left: 15px;
-  }
-
-  .timeline-icon {
-    left: 11px !important;
-    right: auto;
-  }
-}
-
-/* Github Stats */
-.github-section {
-  padding: 8rem 5%;
-  background: rgba(31, 41, 55, 0.5);
   backdrop-filter: blur(10px);
 }
 

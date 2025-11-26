@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaSun, FaMoon, FaFileDownload, FaBars, FaTimes } from 'react-icons/fa';
+import { FaFileDownload, FaBars, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import resumePDF from '../assets/120_Abhishek shelke.pdf';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ activeSection, setActiveSection, darkMode, toggleDarkMode }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -138,9 +139,7 @@ const Navbar = ({ activeSection, setActiveSection, darkMode, toggleDarkMode }) =
                         >
                             <FaFileDownload /> Resume
                         </a>
-                        <button className="theme-toggle" onClick={toggleDarkMode}>
-                            {darkMode ? <FaSun /> : <FaMoon />}
-                        </button>
+                        <ThemeToggle />
                     </div>
                 </nav>
             </div>

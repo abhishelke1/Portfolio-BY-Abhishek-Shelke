@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './App.css';
 import 'devicon/devicon.min.css';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -113,51 +114,52 @@ const App = () => {
   };
 
   return (
-    <div className={`app-container ${darkMode ? 'dark' : 'light'}`}>
-      <div className="gradient-background"></div>
-      <CanvasBackground darkMode={darkMode} />
+    <ThemeProvider>
+      <div className={`app-container ${darkMode ? 'dark' : 'light'}`}>
+        <div className="gradient-background"></div>
+        <CanvasBackground darkMode={darkMode} />
 
-      <Navbar
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        darkMode={darkMode}
-        toggleDarkMode={toggleDarkMode}
-      />
-
-      <CustomCursor />
-      <ScrollProgress activeSection={activeSection} setActiveSection={setActiveSection} />
-
-      <main className="main">
-        <Hero
-          fadeInUp={fadeInUp}
-          staggerContainer={staggerContainer}
-          scaleIn={scaleIn}
-        />
-        <About fadeInUp={popIn} />
-        <Experience
-          staggerContainer={liveStagger}
-          fadeInUp={popIn}
+        <Navbar
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
           darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
         />
-        <Skills
-          staggerContainer={liveStagger}
-          fadeInUp={popIn}
-          darkMode={darkMode}
-        />
-        <Certifications
-          staggerContainer={liveStagger}
-          fadeInUp={popIn}
-        />
-        <Projects
-          staggerContainer={liveStagger}
-          fadeInUp={popIn}
-        />
-        <GithubStats fadeInUp={fadeInUp} darkMode={darkMode} />
-        <Contact fadeInUp={popIn} />
-      </main>
 
-      <Footer />
-    </div >
+        <CustomCursor />
+        <ScrollProgress activeSection={activeSection} setActiveSection={setActiveSection} />
+
+        <main className="main">
+          <Hero
+            fadeInUp={fadeInUp}
+            staggerContainer={staggerContainer}
+            scaleIn={scaleIn}
+          />
+          <About fadeInUp={popIn} />
+          <Experience
+            staggerContainer={liveStagger}
+            fadeInUp={popIn}
+            darkMode={darkMode}
+          />
+          <Skills
+            staggerContainer={liveStagger}
+            fadeInUp={popIn}
+          />
+          <Certifications
+            staggerContainer={liveStagger}
+            fadeInUp={popIn}
+          />
+          <Projects
+            staggerContainer={liveStagger}
+            fadeInUp={popIn}
+          />
+          <GithubStats fadeInUp={fadeInUp} darkMode={darkMode} />
+          <Contact fadeInUp={popIn} />
+        </main>
+
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 };
 

@@ -1,163 +1,107 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import './CanvasBackground.css';
 
 const CanvasBackground = ({ darkMode }) => {
     const canvasRef = useRef(null);
+    const particles = useRef([]);
+    const mousePos = useRef({ x: 0, y: 0 });
+    const rafId = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
+        if (!canvas) return;
+
         const ctx = canvas.getContext('2d');
         let animationFrameId;
-        let particles = [];
-        let mouse = { x: null, y: null };
 
+        // Set canvas size
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         };
 
-        window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-        const handleMouseMove = (event) => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-        };
+        // Create particles
+        const createParticles = () => {
+            const particleCount = window.innerWidth > 768 ? 50 : 30;
+            particles.current = [];
 
-        window.addEventListener('mousemove', handleMouseMove);
-
-        // Particle Class
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * (darkMode ? 0.5 : 1.0);
-                this.vy = (Math.random() - 0.5) * (darkMode ? 0.5 : 1.0);
-                this.size = Math.random() * (darkMode ? 2 : 3);
-
-                // Vibrant colors for Light Mode
-                if (darkMode) {
-                    this.baseColor = 'rgba(255, 255, 255, 0.5)';
-                } else {
-                    const colors = [
-                        'rgba(59, 130, 246, 0.6)', // Blue
-                        'rgba(139, 92, 246, 0.6)', // Purple
-                        'rgba(236, 72, 153, 0.6)', // Pink
-                        'rgba(16, 185, 129, 0.6)'  // Emerald
-                    ];
-                    this.baseColor = colors[Math.floor(Math.random() * colors.length)];
-                }
-                this.color = this.baseColor;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off edges
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-                // Mouse interaction
-                if (mouse.x != null) {
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const maxDistance = 150;
-
-                    if (distance < maxDistance) {
-                        if (darkMode) {
-                            // Spotlight effect: push particles away slightly and brighten
-                            const forceDirectionX = dx / distance;
-                            const forceDirectionY = dy / distance;
-                            const force = (maxDistance - distance) / maxDistance;
-                            const directionX = forceDirectionX * force * 2; // Push strength
-                            const directionY = forceDirectionY * force * 2;
-
-                            this.x -= directionX;
-                            this.y -= directionY;
-                            this.color = 'rgba(255, 255, 255, 1)'; // Brighten
-                        } else {
-                            // Light mode: particles are attracted to mouse
-                            const forceDirectionX = dx / distance;
-                            const forceDirectionY = dy / distance;
-                            const force = (maxDistance - distance) / maxDistance;
-                            const directionX = forceDirectionX * force * 2;
-                            const directionY = forceDirectionY * force * 2;
-
-                            this.x += directionX;
-                            this.y += directionY;
-                        }
-                    } else {
-                        this.color = this.baseColor;
-                    }
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        // Initialize Particles
-        const initParticles = () => {
-            particles = [];
-            // Reduced particle count for better performance (Low Latency)
-            const isMobile = window.innerWidth < 768;
-            const particleCount = isMobile ? 20 : (darkMode ? 80 : 40);
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+                particles.current.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1,
+                    baseX: Math.random() * canvas.width,
+                    baseY: Math.random() * canvas.height
+                });
             }
         };
 
-        initParticles();
+        createParticles();
 
-        // Animation Loop
+        // Mouse move handler for parallax
+        const handleMouseMove = (e) => {
+            mousePos.current = {
+                x: (e.clientX / window.innerWidth) * 2 - 1,
+                y: (e.clientY / window.innerHeight) * 2 - 1
+            };
+        };
+
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+        // Animation loop
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
+            // Get theme colors
+            const primaryColor = getComputedStyle(document.documentElement)
+                .getPropertyValue('--primary').trim() || '#3b82f6';
+            const secondaryColor = getComputedStyle(document.documentElement)
+                .getPropertyValue('--secondary').trim() || '#8b5cf6';
 
-            // Connect particles in Light Mode
-            if (!darkMode) {
-                connectParticles();
-            }
+            particles.current.forEach((particle, i) => {
+                // Update position with parallax effect
+                const parallaxX = mousePos.current.x * 20;
+                const parallaxY = mousePos.current.y * 20;
 
-            // Draw Spotlight in Dark Mode
-            if (darkMode && mouse.x != null) {
-                const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 200);
-                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)');
-                gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
+                particle.x += particle.vx + parallaxX * 0.001;
+                particle.y += particle.vy + parallaxY * 0.001;
 
-            animationFrameId = requestAnimationFrame(animate);
-        };
+                // Bounce off edges
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
-        const connectParticles = () => {
-            const maxDistance = 150;
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = i % 2 === 0
+                    ? `${primaryColor}33`
+                    : `${secondaryColor}33`;
+                ctx.fill();
+
+                // Draw connections
+                particles.current.forEach((otherParticle, j) => {
+                    if (i === j) return;
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < maxDistance) {
+                    if (distance < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - distance / maxDistance})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.strokeStyle = `${primaryColor}${Math.floor((1 - distance / 150) * 20).toString(16).padStart(2, '0')}`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
-                }
-            }
+                });
+            });
+
+            animationFrameId = requestAnimationFrame(animate);
         };
 
         animate();
@@ -170,18 +114,10 @@ const CanvasBackground = ({ darkMode }) => {
     }, [darkMode]);
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: -1, // Behind content but in front of gradient
-                pointerEvents: 'none'
-            }}
-        />
+        <>
+            <canvas ref={canvasRef} className="canvas-background" />
+            <div className="animated-gradient-bg" />
+        </>
     );
 };
 

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import profilePhoto from '../assets/profile.jpg';
+import SpotlightEffect from './SpotlightEffect';
+import ScrollIndicator from './ScrollIndicator';
+import MagneticButton from './MagneticButton';
 
 const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
     const [displayText, setDisplayText] = useState('');
@@ -40,9 +43,10 @@ const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
             className="hero-section"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
         >
+            <SpotlightEffect />
             <div className="hero-content">
                 <motion.h1 className="animated-gradient-text" variants={fadeInUp}>Hello, I'm</motion.h1>
                 <motion.h2 className="hero-title" variants={fadeInUp}>Abhishek Shelke</motion.h2>
@@ -55,12 +59,18 @@ const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
                     Specializing in Kotlin, React, and full-stack development.
                 </motion.p>
                 <motion.div className="hero-buttons" variants={fadeInUp}>
-                    <a href="#projects" className="hero-button">
+                    <MagneticButton
+                        className="hero-button"
+                        onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
                         View My Work
-                    </a>
-                    <a href="#contact" className="hero-button-outline">
+                    </MagneticButton>
+                    <MagneticButton
+                        className="hero-button-outline"
+                        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
                         Contact Me
-                    </a>
+                    </MagneticButton>
                 </motion.div>
             </div>
             <motion.div className="hero-image" variants={scaleIn}>
@@ -80,6 +90,7 @@ const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
                     </div>
                 </div>
             </motion.div>
+            <ScrollIndicator />
         </motion.section>
     );
 };

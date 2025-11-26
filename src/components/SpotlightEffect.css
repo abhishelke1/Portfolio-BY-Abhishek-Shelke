@@ -1,0 +1,22 @@
+.spotlight-effect {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(59, 130, 246, 0.15) 0%,
+            rgba(139, 92, 246, 0.1) 25%,
+            transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    filter: blur(40px);
+    will-change: transform;
+}
+
+@media (max-width: 768px) {
+    .spotlight-effect {
+        display: none;
+    }
+}

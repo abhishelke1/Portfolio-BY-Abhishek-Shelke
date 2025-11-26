@@ -17,12 +17,18 @@ import GithubStats from './components/GithubStats';
 import CanvasBackground from './components/CanvasBackground';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  // Initialize darkMode from localStorage or default to true
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('darkMode');
+    return savedTheme !== null ? JSON.parse(savedTheme) : true;
+  });
   const [activeSection, setActiveSection] = useState('home');
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.className = !darkMode ? 'dark-theme' : 'light-theme';
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', JSON.stringify(newMode));
+    document.body.className = newMode ? 'dark-theme' : 'light-theme';
   };
 
   useEffect(() => {

@@ -5,7 +5,7 @@
   "engines": {
     "node": "18.x"
   },
-  "homepage": "https://abhishelke1.github.io/Portfolio-BY-Abhishek-Shelke",
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

@@ -5,25 +5,25 @@ import SpotlightEffect from './SpotlightEffect';
 import ScrollIndicator from './ScrollIndicator';
 import MagneticButton from './MagneticButton';
 
+const ROLES = ["Cyber Security Expert", "Frontend Developer", "Backend Developer", "App Developer", "Web Developer"];
+
 const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
     const [displayText, setDisplayText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-
-    const roles = ["Cyber Security Expert", "Frontend Developer", "Backend Developer", "App Developer", "Web Developer"];
     const typingSpeed = 50;
     const deletingSpeed = 50;
     const pauseBetween = 200;
 
     useEffect(() => {
-        const currentRole = roles[currentRoleIndex];
+        const currentRole = ROLES[currentRoleIndex];
 
         const handleTyping = () => {
             if (isDeleting) {
                 setDisplayText(currentRole.substring(0, displayText.length - 1));
                 if (displayText === '') {
                     setIsDeleting(false);
-                    setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+                    setCurrentRoleIndex((prev) => (prev + 1) % ROLES.length);
                 }
             } else {
                 setDisplayText(currentRole.substring(0, displayText.length + 1));

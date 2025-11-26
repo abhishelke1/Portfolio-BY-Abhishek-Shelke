@@ -5,7 +5,6 @@ const CanvasBackground = ({ darkMode }) => {
     const canvasRef = useRef(null);
     const particles = useRef([]);
     const mousePos = useRef({ x: 0, y: 0 });
-    const rafId = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;

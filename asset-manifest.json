@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Portfolio-BY-Abhishek-Shelke/static/css/main.04433ef4.css",
-    "main.js": "/Portfolio-BY-Abhishek-Shelke/static/js/main.5b813b8d.js",
+    "main.css": "/Portfolio-BY-Abhishek-Shelke/static/css/main.d0c1ebd3.css",
+    "main.js": "/Portfolio-BY-Abhishek-Shelke/static/js/main.b36c1ddd.js",
     "static/js/453.1407b060.chunk.js": "/Portfolio-BY-Abhishek-Shelke/static/js/453.1407b060.chunk.js",
     "static/media/devicon.svg?iehcku": "/Portfolio-BY-Abhishek-Shelke/static/media/devicon.de33ff67547800466a48.svg",
     "static/media/devicon.woff?iehcku": "/Portfolio-BY-Abhishek-Shelke/static/media/devicon.25bdb9cbf8e5f9b4dde9.woff",
@@ -27,12 +27,12 @@
     "static/media/Web_Fundamentals.png": "/Portfolio-BY-Abhishek-Shelke/static/media/Web_Fundamentals.f89e0e17e84db276d1a1.png",
     "static/media/cert5.jpg": "/Portfolio-BY-Abhishek-Shelke/static/media/cert5.faf94420bc746ed3d0d2.jpg",
     "index.html": "/Portfolio-BY-Abhishek-Shelke/index.html",
-    "main.04433ef4.css.map": "/Portfolio-BY-Abhishek-Shelke/static/css/main.04433ef4.css.map",
-    "main.5b813b8d.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/main.5b813b8d.js.map",
+    "main.d0c1ebd3.css.map": "/Portfolio-BY-Abhishek-Shelke/static/css/main.d0c1ebd3.css.map",
+    "main.b36c1ddd.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/main.b36c1ddd.js.map",
     "453.1407b060.chunk.js.map": "/Portfolio-BY-Abhishek-Shelke/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.04433ef4.css",
-    "static/js/main.5b813b8d.js"
+    "static/css/main.d0c1ebd3.css",
+    "static/js/main.b36c1ddd.js"
   ]
 }

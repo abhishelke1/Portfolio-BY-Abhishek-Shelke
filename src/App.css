@@ -2050,4 +2050,540 @@ body {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}/* Gooey Navigation Blob */
+.nav {
+    position: relative;
+}
+
+.nav-blob {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Fallback for browsers without filter support */
+@supports not (filter: url(#gooey-blob)) {
+    .nav-blob {
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+}
+
+/* Enhanced nav link styles for gooey effect */
+.nav-link {
+    z-index: 1;
+}
+
+/* Vertical Scroll Progress Rail */
+.scroll-rail {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.scroll-rail-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.scroll-rail-dot {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid var(--text-primary);
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-rail-dot .dot-inner {
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    transition: all 0.3s ease;
+}
+
+.scroll-rail-dot.active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.scroll-rail-dot.active .dot-inner {
+    width: 6px;
+    height: 6px;
+    background: white;
+}
+
+.scroll-rail-dot:hover {
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.scroll-rail-tooltip {
+    position: absolute;
+    right: 100%;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+}
+
+/* Dark theme specific scroll rail styles */
+.dark-theme .scroll-rail-tooltip {
+    background: rgba(31, 41, 55, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .scroll-rail-dot {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.dark-theme .scroll-rail-dot:hover {
+    border-color: var(--primary);
+}
+
+/* Light theme specific scroll rail styles */
+.light-theme .scroll-rail-tooltip {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.light-theme .scroll-rail-dot {
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.light-theme .scroll-rail-dot:hover {
+    border-color: var(--primary);
+}
+
+/* Hide scroll rail on smaller screens */
+@media (max-width: 768px) {
+    .scroll-rail {
+        display: none;
+    }
+
+    .nav-blob {
+        display: none;
+    }
+}
+/* ================================================
+   CERTIFICATIONS ACCORDION STYLES
+   ================================================ */
+
+.certifications-section {
+    padding: 8rem 5% 4rem;
+    position: relative;
+}
+
+.certifications-accordion {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.certification-accordion-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease-out;
+}
+
+.certification-accordion-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.certification-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease-out;
+    min-height: 44px;
+    /* Touch-friendly */
+}
+
+.certification-header:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.certification-header:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+}
+
+.certification-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    text-align: left;
+}
+
+.cert-icon {
+    color: var(--primary);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.certification-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.certification-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.certification-category {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.certification-chevron {
+    color: var(--primary);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.certification-expanded-content {
+    overflow: hidden;
+}
+
+.certification-expanded-inner {
+    padding: 0 1.5rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.certification-image-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.certification-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.certification-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.certification-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.meta-item svg {
+    color: var(--primary);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.meta-item strong {
+    font-weight: 600;
+}
+
+.certification-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.certification-description strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .certifications-section {
+        padding: 6rem 5% 3rem;
+    }
+
+    .certification-expanded-inner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .certification-header {
+        padding: 1rem;
+    }
+
+    .certification-expanded-inner {
+        padding: 0 1rem 1rem;
+    }
+
+    .certification-name {
+        font-size: 1rem;
+    }
+
+    .cert-icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* ================================================
+   ANIMATED TIMELINE STYLES
+   ================================================ */
+
+.experience-section {
+    position: relative;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* Animated timeline connector line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+    transform-origin: top;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    opacity: 1;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+/* Timeline icon with pulse animation */
+.timeline-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: -25px;
+    background: var(--primary);
+    border: 4px solid var(--card-bg);
+    top: 20px;
+    border-radius: 50%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    animation: timelinePulse 2s infinite;
+}
+
+@keyframes timelinePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+.timeline-item.right .timeline-icon {
+    left: -25px;
+}
+
+.timeline-content {
+    padding: 0;
+    background-color: transparent;
+    position: relative;
+    border-radius: 6px;
+}
+
+.timeline-body {
+    padding: 1.5rem 2rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: all 0.25s ease-out;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    position: relative;
+    will-change: transform;
+}
+
+.timeline-body:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+    border-color: var(--primary);
+}
+
+.timeline-date {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 20px;
+}
+
+.timeline-title {
+    font-size: 1.3rem;
+    margin: 0.5rem 0 0.25rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.timeline-company {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.timeline-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive timeline */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        left: 0 !important;
+    }
+
+    .timeline-icon {
+        left: 6px !important;
+        right: auto !important;
+        width: 50px;
+        height: 50px;
+    }
+
+    .timeline-body {
+        padding: 1.25rem 1.5rem;
+    }
+}
+
+/* ================================================
+   PERFORMANCE OPTIMIZATIONS
+   ================================================ */
+
+/* Use containment for better performance */
+.certification-accordion-item,
+.timeline-item {
+    contain: layout style paint;
+}
+
+/* Optimize animations */
+.certification-header,
+.timeline-body {
+    will-change: transform;
+}
+
+.certification-image {
+    will-change: auto;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .timeline-icon {
+        animation: none !important;
+    }
 }

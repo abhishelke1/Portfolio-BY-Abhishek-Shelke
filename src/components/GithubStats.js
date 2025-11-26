@@ -1,28 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const GithubStats = ({ fadeInUp, darkMode }) => {
-    const [stats, setStats] = useState(null);
-    const [error, setError] = useState(false);
     const username = 'abhishelke1';
-
-    useEffect(() => {
-        // Fetch GitHub stats data to ensure it loads
-        const checkGitHubAPI = async () => {
-            try {
-                const response = await fetch(`https://api.github.com/users/${username}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setStats(data);
-                }
-            } catch (err) {
-                console.log('GitHub API check:', err);
-                setError(true);
-            }
-        };
-
-        checkGitHubAPI();
-    }, []);
 
     return (
         <motion.section

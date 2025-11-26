@@ -35,7 +35,7 @@ const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
 
         const timer = setTimeout(handleTyping, isDeleting ? deletingSpeed : typingSpeed);
         return () => clearTimeout(timer);
-    }, [displayText, isDeleting, currentRoleIndex]);
+    }, [displayText, isDeleting, currentRoleIndex, roles]);
 
     return (
         <motion.section

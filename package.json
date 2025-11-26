@@ -2,6 +2,9 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.x"
+  },
   "homepage": "https://abhishelke1.github.io/Portfolio-BY-Abhishek-Shelke",
   "dependencies": {
     "@emotion/react": "^11.14.0",

@@ -5,7 +5,7 @@ import SpotlightEffect from './SpotlightEffect';
 import ScrollIndicator from './ScrollIndicator';
 import MagneticButton from './MagneticButton';
 
-const ROLES = ["Cyber Security Expert", "Frontend Developer", "Backend Developer", "App Developer", "Web Developer"];
+const ROLES = ["Full-Stack Web Developer", "AI & Machine Learning Engineer", "Data Scientist & AI Engineer"];
 
 const Hero = ({ fadeInUp, staggerContainer, scaleIn }) => {
     const [displayText, setDisplayText] = useState('');

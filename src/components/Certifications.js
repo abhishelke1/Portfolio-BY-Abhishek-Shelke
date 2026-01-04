@@ -17,6 +17,7 @@ import aiEveryone from '../assets/Ai.png';
 
 const Certifications = ({ staggerContainer, fadeInUp }) => {
     const [expandedCert, setExpandedCert] = useState(null);
+    const [activeCategory, setActiveCategory] = useState('All');
 
     // Enhanced certification data with issuer and date
     const certifications = [
@@ -133,6 +134,18 @@ const Certifications = ({ staggerContainer, fadeInUp }) => {
         }
     ];
 
+    // Get unique categories from certifications
+    const categories = ['All', ...Array.from(new Set(certifications.map(cert => cert.category)))];
+
+    const filteredCertifications = activeCategory === 'All'
+        ? certifications
+        : certifications.filter(cert => cert.category === activeCategory);
+
+    const getCategoryCount = (category) => {
+        if (category === 'All') return certifications.length;
+        return certifications.filter(cert => cert.category === category).length;
+    };
+
     const toggleCertification = (index) => {
         setExpandedCert(expandedCert === index ? null : index);
     };
@@ -156,101 +169,130 @@ const Certifications = ({ staggerContainer, fadeInUp }) => {
             <motion.h2 className="section-title" variants={fadeInUp}>
                 Licenses & Certifications
             </motion.h2>
+
+            {/* Category Filter Tabs */}
+            <motion.div className="certification-categories-filter" variants={fadeInUp}>
+                {categories.map((category) => (
+                    <button
+                        key={category}
+                        className={`category-btn ${activeCategory === category ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveCategory(category);
+                            setExpandedCert(null); // Close any expanded cert when changing category
+                        }}
+                    >
+                        {category}
+                        <span className="category-count">{getCategoryCount(category)}</span>
+                    </button>
+                ))}
+            </motion.div>
+
             <div className="glass-container">
-                <motion.div className="certifications-accordion" variants={staggerContainer}>
-                    {certifications.map((cert, index) => {
-                        const isExpanded = expandedCert === index;
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeCategory}
+                        className="certifications-accordion"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {filteredCertifications.map((cert, index) => {
+                            const isExpanded = expandedCert === index;
 
-                        return (
-                            <motion.div
-                                key={index}
-                                className="certification-accordion-item"
-                                variants={fadeInUp}
-                            >
-                                <button
-                                    className="certification-header"
-                                    onClick={() => toggleCertification(index)}
-                                    onKeyPress={(e) => handleKeyPress(e, index)}
-                                    aria-expanded={isExpanded}
-                                    aria-controls={`cert-content-${index}`}
+                            return (
+                                <motion.div
+                                    key={`${cert.title}-${index}`}
+                                    className="certification-accordion-item"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.3, delay: index * 0.05 }}
                                 >
-                                    <div className="certification-header-left">
-                                        <FaCertificate className="cert-icon" />
-                                        <div className="certification-header-text">
-                                            <h3 className="certification-name">{cert.title}</h3>
-                                            <span className="certification-category">{cert.category}</span>
-                                        </div>
-                                    </div>
-                                    <motion.div
-                                        className="certification-chevron"
-                                        animate={{ rotate: isExpanded ? 180 : 0 }}
-                                        transition={{ duration: 0.2, ease: "easeOut" }}
+                                    <button
+                                        className="certification-header"
+                                        onClick={() => toggleCertification(index)}
+                                        onKeyPress={(e) => handleKeyPress(e, index)}
+                                        aria-expanded={isExpanded}
+                                        aria-controls={`cert-content-${index}`}
                                     >
-                                        <FaChevronDown />
-                                    </motion.div>
-                                </button>
-
-                                <AnimatePresence initial={false}>
-                                    {isExpanded && (
-                                        <motion.div
-                                            id={`cert-content-${index}`}
-                                            className="certification-expanded-content"
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{
-                                                height: "auto",
-                                                opacity: 1,
-                                                transition: {
-                                                    height: { duration: 0.25, ease: "easeOut" },
-                                                    opacity: { duration: 0.2, delay: 0.1 }
-                                                }
-                                            }}
-                                            exit={{
-                                                height: 0,
-                                                opacity: 0,
-                                                transition: {
-                                                    height: { duration: 0.2, ease: "easeIn" },
-                                                    opacity: { duration: 0.15 }
-                                                }
-                                            }}
-                                        >
-                                            <div className="certification-expanded-inner">
-                                                <motion.div
-                                                    className="certification-image-wrapper"
-                                                    initial={{ scale: 0.95, opacity: 0 }}
-                                                    animate={{ scale: 1, opacity: 1 }}
-                                                    transition={{ duration: 0.25, delay: 0.15 }}
-                                                >
-                                                    <img
-                                                        src={cert.image}
-                                                        alt={cert.title}
-                                                        className="certification-image"
-                                                        loading="lazy"
-                                                        decoding="async"
-                                                    />
-                                                </motion.div>
-                                                <div className="certification-details">
-                                                    <div className="certification-meta">
-                                                        <div className="meta-item">
-                                                            <FaCertificate />
-                                                            <span><strong>Issuer:</strong> {cert.issuer}</span>
-                                                        </div>
-                                                        <div className="meta-item">
-                                                            <FaCalendar />
-                                                            <span><strong>Date:</strong> {cert.date}</span>
-                                                        </div>
-                                                    </div>
-                                                    <p className="certification-description">
-                                                        <strong>Skills:</strong> {cert.description}
-                                                    </p>
-                                                </div>
+                                        <div className="certification-header-left">
+                                            <FaCertificate className="cert-icon" />
+                                            <div className="certification-header-text">
+                                                <h3 className="certification-name">{cert.title}</h3>
+                                                <span className="certification-category">{cert.category}</span>
                                             </div>
+                                        </div>
+                                        <motion.div
+                                            className="certification-chevron"
+                                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                                            transition={{ duration: 0.2, ease: "easeOut" }}
+                                        >
+                                            <FaChevronDown />
                                         </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        );
-                    })}
-                </motion.div>
+                                    </button>
+
+                                    <AnimatePresence initial={false}>
+                                        {isExpanded && (
+                                            <motion.div
+                                                id={`cert-content-${index}`}
+                                                className="certification-expanded-content"
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{
+                                                    height: "auto",
+                                                    opacity: 1,
+                                                    transition: {
+                                                        height: { duration: 0.25, ease: "easeOut" },
+                                                        opacity: { duration: 0.2, delay: 0.1 }
+                                                    }
+                                                }}
+                                                exit={{
+                                                    height: 0,
+                                                    opacity: 0,
+                                                    transition: {
+                                                        height: { duration: 0.2, ease: "easeIn" },
+                                                        opacity: { duration: 0.15 }
+                                                    }
+                                                }}
+                                            >
+                                                <div className="certification-expanded-inner">
+                                                    <motion.div
+                                                        className="certification-image-wrapper"
+                                                        initial={{ scale: 0.95, opacity: 0 }}
+                                                        animate={{ scale: 1, opacity: 1 }}
+                                                        transition={{ duration: 0.25, delay: 0.15 }}
+                                                    >
+                                                        <img
+                                                            src={cert.image}
+                                                            alt={cert.title}
+                                                            className="certification-image"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                        />
+                                                    </motion.div>
+                                                    <div className="certification-details">
+                                                        <div className="certification-meta">
+                                                            <div className="meta-item">
+                                                                <FaCertificate />
+                                                                <span><strong>Issuer:</strong> {cert.issuer}</span>
+                                                            </div>
+                                                            <div className="meta-item">
+                                                                <FaCalendar />
+                                                                <span><strong>Date:</strong> {cert.date}</span>
+                                                            </div>
+                                                        </div>
+                                                        <p className="certification-description">
+                                                            <strong>Skills:</strong> {cert.description}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </motion.section>
     );

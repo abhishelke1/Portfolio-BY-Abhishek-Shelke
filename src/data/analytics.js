@@ -1,0 +1,50 @@
+export const analytics = {
+  id: 'data',
+  label: 'Data Analyst',
+  tagline: 'I turn data noise into decisions.',
+  bio: 'Data analyst and ML practitioner who builds systems that extract signal from noise. From NLP pipelines to predictive maintenance models — I make data work harder so teams can move faster.',
+  terminal: [
+    { type: 'cmd', text: '$ python3 analyze.py --dataset portfolio' },
+    { type: 'output', text: 'Loading 3 years of project data...' },
+    { type: 'cmd', text: '>>> models_trained = 3' },
+    { type: 'cmd', text: '>>> avg_accuracy = 94.6' },
+    { type: 'cmd', text: '>>> print(insight)' },
+    { type: 'output', text: '"This candidate ships."' },
+  ],
+  metrics: [
+    { value: 60, suffix: '%', label: 'Extraction Time Saved' },
+    { value: 3, suffix: '', label: 'ML Models Deployed' },
+    { value: 1, suffix: '', label: 'Hackathon Finals' },
+    { value: 94.6, suffix: '%', label: 'Model Accuracy' },
+  ],
+  skills: [
+    { name: 'Python', level: 95 },
+    { name: 'Pandas / NumPy', level: 90 },
+    { name: 'SQL', level: 88 },
+    { name: 'XGBoost', level: 82 },
+    { name: 'Power BI', level: 78 },
+    { name: 'LangChain', level: 75 },
+    { name: 'FAISS', level: 72 },
+    { name: 'Streamlit', level: 80 },
+  ],
+  projects: [
+    {
+      title: 'Equipment Performance Analytics',
+      impact: 'Predictive maintenance system using XGBoost and sensor data, reducing unplanned downtime through ML-driven anomaly detection.',
+      stack: ['Python', 'XGBoost', 'Pandas', 'Streamlit'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'Document Analytics System',
+      impact: 'NLP-powered document processing with FAISS vector search, cutting extraction time by 60% across enterprise workflows.',
+      stack: ['Python', 'LangChain', 'FAISS', 'FastAPI'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'E-Commerce Sales Analytics',
+      impact: 'Sales analytics dashboard with real-time insights, contributing to 45% latency improvement in data retrieval.',
+      stack: ['Python', 'SQL', 'Power BI', 'MongoDB'],
+      link: 'https://github.com/abhishelke1',
+    },
+  ],
+}

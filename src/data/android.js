@@ -1,0 +1,51 @@
+export const android = {
+  id: 'android',
+  label: 'Android Dev',
+  tagline: "I make apps that work where the internet doesn't.",
+  bio: 'Mobile developer building Android applications that prioritize offline capability, accessibility, and real-world impact. Every app ships with purpose — from farmers in rural India to enterprise document workflows.',
+  terminal: [
+    { type: 'cmd', text: '$ adb devices' },
+    { type: 'output', text: 'List of devices attached' },
+    { type: 'output', text: 'abhishek_pixel    device' },
+    { type: 'cmd', text: '$ gradle :app:build' },
+    { type: 'output', text: 'BUILD SUCCESSFUL in 4s' },
+    { type: 'cmd', text: '$ logcat | grep "impact"' },
+    { type: 'output', text: 'I/Portfolio: 100+ farmers reached via AgroEasy' },
+  ],
+  metrics: [
+    { value: 100, suffix: '+', label: 'Farmers Reached' },
+    { value: 40, suffix: '%', label: 'Accuracy Improvement' },
+    { value: 3, suffix: '', label: 'Apps Shipped' },
+    { value: 4, suffix: '', label: 'SDK Integrations' },
+  ],
+  skills: [
+    { name: 'Kotlin', category: 'language' },
+    { name: 'Java', category: 'language' },
+    { name: 'Android SDK', category: 'framework' },
+    { name: 'Firebase', category: 'backend' },
+    { name: 'TensorFlow Lite', category: 'ml' },
+    { name: 'MVVM', category: 'architecture' },
+    { name: 'Material Design', category: 'ui' },
+    { name: 'Jetpack', category: 'framework' },
+  ],
+  projects: [
+    {
+      title: 'AgroEasy',
+      impact: 'Agricultural app reaching 100+ farmers with 40% accuracy improvement in crop disease detection using on-device ML.',
+      stack: ['Kotlin', 'TensorFlow Lite', 'Firebase', 'Material Design'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'Smart E-Commerce App',
+      impact: 'Mobile commerce app with voice assistant integration for hands-free shopping and order management.',
+      stack: ['Java', 'Android SDK', 'REST API', 'Voice AI'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'AI Document Analyst',
+      impact: 'Mobile client for document analytics platform with API consumption, real-time processing, and offline support.',
+      stack: ['Kotlin', 'Jetpack', 'Retrofit', 'Room DB'],
+      link: 'https://github.com/abhishelke1',
+    },
+  ],
+}

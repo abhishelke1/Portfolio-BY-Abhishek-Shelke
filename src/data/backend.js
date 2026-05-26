@@ -1,0 +1,50 @@
+export const backend = {
+  id: 'backend',
+  label: 'Backend Dev',
+  tagline: 'I build the parts users never see.',
+  bio: 'Backend systems architect focused on building resilient, scalable infrastructure. I optimize what matters — latency, throughput, and reliability — so the frontend never has to apologize.',
+  terminal: [
+    { type: 'cmd', text: '$ whoami' },
+    { type: 'output', text: 'abhishek-shelke' },
+    { type: 'cmd', text: '$ cat skills.json | jq \'.backend\'' },
+    { type: 'output', text: '["Node.js", "Python", "PostgreSQL", "Docker", "AWS"]' },
+    { type: 'cmd', text: '$ uptime' },
+    { type: 'output', text: 'Backend dev since 2023. Still compiling.' },
+  ],
+  metrics: [
+    { value: 45, suffix: '%', label: 'Latency Reduction' },
+    { value: 3, suffix: '', label: 'REST APIs Shipped' },
+    { value: 100, suffix: '+', label: 'Active Users' },
+    { value: 60, suffix: '%', label: 'Processing Time Cut' },
+  ],
+  skills: [
+    { name: 'Node.js', category: 'runtime' },
+    { name: 'Python', category: 'language' },
+    { name: 'REST APIs', category: 'architecture' },
+    { name: 'Microservices', category: 'architecture' },
+    { name: 'PostgreSQL', category: 'database' },
+    { name: 'Redis', category: 'database' },
+    { name: 'Docker', category: 'devops' },
+    { name: 'AWS', category: 'cloud' },
+  ],
+  projects: [
+    {
+      title: 'Smart E-Commerce Platform',
+      impact: 'Achieved 45% latency reduction through optimized backend architecture and intelligent caching strategies.',
+      stack: ['Node.js', 'PostgreSQL', 'Redis', 'Docker'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'Document Analytics Engine',
+      impact: 'Reduced document extraction time by 60% using NLP pipelines and FAISS vector search.',
+      stack: ['Python', 'FastAPI', 'FAISS', 'AWS'],
+      link: 'https://github.com/abhishelke1',
+    },
+    {
+      title: 'Equipment Predictive Maintenance',
+      impact: 'Built end-to-end data pipeline for predictive maintenance, improving equipment uptime with ML-driven alerts.',
+      stack: ['Python', 'XGBoost', 'PostgreSQL', 'Docker'],
+      link: 'https://github.com/abhishelke1',
+    },
+  ],
+}

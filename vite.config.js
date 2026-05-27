@@ -4,5 +4,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: process.env.NETLIFY ? '/' : '/Portfolio-BY-Abhishek-Shelke/',
+  base: process.env.NETLIFY === 'true' ? '/' : '/Portfolio-BY-Abhishek-Shelke/',
 })

@@ -1,57 +1,96 @@
-import DomainSwitcher from './DomainSwitcher'
-import { FiGithub } from 'react-icons/fi'
+import { useEffect, useRef, useState } from "react";
+import { FiArrowUpRight, FiMenu, FiX, FiPause, FiPlay } from "react-icons/fi";
 
-export default function Header({ domain, setDomain, DOMAINS }) {
+import { useMotionPreference } from "./MotionProvider";
+const links = [
+  ["#projects", "Work"],
+  ["#about", "About"],
+  ["#skills", "Toolkit"],
+];
+
+export default function Header() {
+  const { paused, toggle: toggleMotion } = useMotionPreference();
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const toggle = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-15% 0px -55% 0px" },
+    );
+    document
+      .querySelectorAll("main section[id]")
+      .forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const close = (event) => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        backdropFilter: 'blur(16px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-        background: 'color-mix(in srgb, var(--bg-primary) 85%, transparent)',
-        borderBottom: '1px solid var(--border-color)',
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '56px',
-        }}
-      >
-        {/* Logo */}
+    <header className="header">
+      <div className="container header-inner">
         <a
-          href="#"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.85rem',
-            fontWeight: 700,
-            color: 'var(--text-primary)',
-            textDecoration: 'none',
-            letterSpacing: '0.02em',
-          }}
+          className="wordmark"
+          href="#home"
+          aria-label="Abhishek Shelke, home"
+          onClick={() => setOpen(false)}
         >
-          ABHISHEK<span style={{ color: 'var(--accent)' }}>.SH</span>
+          abhishek<span>®</span>
         </a>
-
-        {/* Domain Switcher (center) */}
-        <DomainSwitcher domain={domain} setDomain={setDomain} DOMAINS={DOMAINS} />
-
-        {/* Right: GitHub */}
-        <a
-          href="https://github.com/abhishelke1"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: 'var(--text-muted)', display: 'flex' }}
-          aria-label="GitHub"
+        <button
+          className="motion-toggle"
+          onClick={toggleMotion}
+          aria-label={paused ? "Resume animations" : "Pause animations"}
+          title={paused ? "Resume animations" : "Pause animations"}
         >
-          <FiGithub size={18} />
-        </a>
+          {paused ? <FiPlay /> : <FiPause />}
+          <span>{paused ? "Play motion" : "Pause motion"}</span>
+        </button>
+        <button
+          ref={toggle}
+          className="menu-toggle"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          aria-controls="main-nav"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <FiX /> : <FiMenu />}
+        </button>
+        <nav
+          id="main-nav"
+          aria-label="Main navigation"
+          className={`nav ${open ? "is-open" : ""}`}
+        >
+          {links.map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={active === href ? "location" : undefined}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
+          <a
+            className="nav-contact"
+            href="#contact"
+            onClick={() => setOpen(false)}
+          >
+            Let’s talk <FiArrowUpRight />
+          </a>
+        </nav>
       </div>
     </header>
-  )
+  );
 }

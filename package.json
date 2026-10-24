@@ -1,6 +1,6 @@
 {
   "name": "portfolio-abhishek-shelke",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "homepage": "https://abhishelke1.github.io/Portfolio-BY-Abhishek-Shelke",
@@ -8,14 +8,15 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "vite build --base=/Portfolio-BY-Abhishek-Shelke/",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "framer-motion": "^12.12.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",

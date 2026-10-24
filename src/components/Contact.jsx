@@ -1,83 +1,60 @@
-import { FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FiArrowUpRight, FiGithub, FiLinkedin } from "react-icons/fi";
 
 export default function Contact() {
   return (
-    <section className="section container" id="contact">
-      <div className="section-label">// Contact</div>
-
-      <div style={{ maxWidth: '560px' }}>
-        <h2
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-            fontWeight: 800,
-            color: 'var(--text-primary)',
-            lineHeight: 1.1,
-            letterSpacing: '-0.02em',
-            marginBottom: '1.5rem',
-          }}
-        >
-          Let's build
-          <br />
-          something<span style={{ color: 'var(--accent)' }}>.</span>
-        </h2>
-
-        <p
-          style={{
-            fontSize: '0.95rem',
-            color: 'var(--text-muted)',
-            lineHeight: 1.7,
-            marginBottom: '2rem',
-          }}
-        >
-          Open to collaborations, freelance work, and full-time opportunities.
-        </p>
-
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.75rem',
-          }}
-        >
-
+    <section
+      className="contact-section"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <div className="container">
+        <div className="contact-top">
+          <span className="eyebrow">04 / WHAT’S NEXT?</span>
+          <span className="availability">
+            <i className="status-dot" /> Open to opportunities
+          </span>
+        </div>
+        <div className="contact-main">
+          <div>
+            <h2 id="contact-title">
+              Good work starts
+              <br /> with a <span className="serif">conversation.</span>
+            </h2>
+            <p>
+              Have an interesting problem, a role in mind, or an idea?
+              <br /> I’d love to hear what you’re working on.
+            </p>
+          </div>
           <a
-            href="https://github.com/abhishelke1"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-            }}
-          >
-            <FiGithub size={16} />
-            github.com/abhishelke1
-          </a>
-
-          <a
+            className="contact-arrow"
             href="https://www.linkedin.com/in/abhishek-shelke-it/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-            }}
+            aria-label="Connect with Abhishek on LinkedIn"
           >
-            <FiLinkedin size={16} />
-            linkedin.com/in/abhishek-shelke-it
+            <FiArrowUpRight />
           </a>
+        </div>
+        <div className="contact-bottom">
+          <a
+            className="text-link"
+            href="https://www.linkedin.com/in/abhishek-shelke-it/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiLinkedin /> Let’s connect on LinkedIn <FiArrowUpRight />
+          </a>
+          <a
+            className="text-link"
+            href="https://github.com/abhishelke1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiGithub /> Find me on GitHub <FiArrowUpRight />
+          </a>
+          <span>BASED IN INDIA. OPEN TO WHAT’S NEXT.</span>
         </div>
       </div>
     </section>
-  )
+  );
 }
